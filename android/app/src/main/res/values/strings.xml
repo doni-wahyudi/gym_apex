@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">ApexForge Gym OS</string>
+    <string name="title_activity_main">ApexForge Gym OS</string>
+    <string name="package_name">com.apexforge.gym</string>
+    <string name="custom_url_scheme">com.apexforge.gym</string>
+</resources>
