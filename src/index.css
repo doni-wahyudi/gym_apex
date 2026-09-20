@@ -87,47 +87,247 @@
 }
 
 /* ==========================================================================
-   5 Athletic Color Themes (Cyan Cyber, Emerald Power, Crimson Fury, Solar Amber, Ultraviolet)
+   5 Athletic Color Themes — FULL VISUAL IDENTITIES
+   Each theme overrides: backgrounds, sidebar, cards, borders, glows, accents
    ========================================================================== */
+
+/* ─── THEME 1: CYAN CYBER ── Tech / Hacker / Deep Space ──────────────────── */
 [data-theme="cyan"] {
-  --color-cyan: #06b6d4;
-  --color-cyan-dark: #0891b2;
-  --color-cyan-glow: rgba(6, 182, 212, 0.28);
-  --color-cyan-subtle: rgba(6, 182, 212, 0.14);
-  --border-focus: #06b6d4;
+  /* Primary accent */
+  --primary:           #06b6d4;
+  --primary-dark:      #0891b2;
+  --primary-light:     #22d3ee;
+  --primary-glow:      rgba(6, 182, 212, 0.30);
+  --primary-subtle:    rgba(6, 182, 212, 0.10);
+
+  /* Legacy aliases so all existing components still work */
+  --color-cyan:        #06b6d4;
+  --color-cyan-dark:   #0891b2;
+  --color-cyan-glow:   rgba(6, 182, 212, 0.28);
+  --color-cyan-subtle: rgba(6, 182, 212, 0.10);
+  --border-focus:      #06b6d4;
+
+  /* Deep Space Navy backgrounds */
+  --bg-base:             #050c14;
+  --bg-subtle:           #070f1a;
+  --bg-surface:          #0c1625;
+  --bg-surface-elevated: #111e30;
+  --bg-surface-hover:    #172538;
+  --bg-surface-active:   #1d2e44;
+  --bg-card:             #0c1625;
+
+  /* Sidebar: deep teal-navy gradient */
+  --sidebar-bg:          linear-gradient(180deg, #070f1a 0%, #080e18 60%, #060d16 100%);
+  --sidebar-border:      rgba(6, 182, 212, 0.12);
+  --sidebar-glow:        0 0 60px rgba(6, 182, 212, 0.06) inset;
+
+  /* Header */
+  --header-bg:           rgba(7, 15, 26, 0.92);
+  --header-border:       rgba(6, 182, 212, 0.10);
+
+  /* Borders */
+  --border-subtle:       rgba(6, 182, 212, 0.07);
+  --border-medium:       rgba(6, 182, 212, 0.13);
+  --border-strong:       rgba(6, 182, 212, 0.25);
+
+  /* Shadows */
+  --shadow-sm:  0 1px 4px rgba(0,0,0,0.6), 0 0 0 1px rgba(6,182,212,0.04);
+  --shadow-md:  0 4px 16px rgba(0,0,0,0.7), 0 0 20px rgba(6,182,212,0.05);
+  --shadow-lg:  0 12px 40px rgba(0,0,0,0.8), 0 0 40px rgba(6,182,212,0.08);
+  --shadow-glow: 0 0 30px rgba(6,182,212,0.30);
+
+  /* Noise tint overlay (CSS background-image) */
+  --theme-noise: radial-gradient(ellipse 120% 80% at 0% 0%, rgba(6,182,212,0.06) 0%, transparent 60%),
+                 radial-gradient(ellipse 60% 60% at 100% 100%, rgba(8,145,178,0.04) 0%, transparent 50%);
+
+  /* Scrollbar */
+  --scrollbar-thumb: rgba(6, 182, 212, 0.30);
 }
 
+/* ─── THEME 2: EMERALD POWER ── Forest / Vitality / Nature ───────────────── */
 [data-theme="emerald"] {
-  --color-cyan: #10b981;
-  --color-cyan-dark: #059669;
-  --color-cyan-glow: rgba(16, 185, 129, 0.28);
-  --color-cyan-subtle: rgba(16, 185, 129, 0.14);
-  --border-focus: #10b981;
+  --primary:           #10b981;
+  --primary-dark:      #059669;
+  --primary-light:     #34d399;
+  --primary-glow:      rgba(16, 185, 129, 0.30);
+  --primary-subtle:    rgba(16, 185, 129, 0.10);
+
+  --color-cyan:        #10b981;
+  --color-cyan-dark:   #059669;
+  --color-cyan-glow:   rgba(16, 185, 129, 0.28);
+  --color-cyan-subtle: rgba(16, 185, 129, 0.10);
+  --border-focus:      #10b981;
+
+  /* Dark forest green backgrounds */
+  --bg-base:             #030d09;
+  --bg-subtle:           #041208;
+  --bg-surface:          #071a0f;
+  --bg-surface-elevated: #0c2214;
+  --bg-surface-hover:    #112a1a;
+  --bg-surface-active:   #163220;
+  --bg-card:             #071a0f;
+
+  /* Sidebar: rich dark forest */
+  --sidebar-bg:          linear-gradient(180deg, #041208 0%, #051009 60%, #040e07 100%);
+  --sidebar-border:      rgba(16, 185, 129, 0.12);
+  --sidebar-glow:        0 0 60px rgba(16, 185, 129, 0.07) inset;
+
+  --header-bg:           rgba(4, 18, 8, 0.92);
+  --header-border:       rgba(16, 185, 129, 0.10);
+
+  --border-subtle:       rgba(16, 185, 129, 0.07);
+  --border-medium:       rgba(16, 185, 129, 0.14);
+  --border-strong:       rgba(16, 185, 129, 0.26);
+
+  --shadow-sm:  0 1px 4px rgba(0,0,0,0.65), 0 0 0 1px rgba(16,185,129,0.04);
+  --shadow-md:  0 4px 16px rgba(0,0,0,0.7), 0 0 20px rgba(16,185,129,0.06);
+  --shadow-lg:  0 12px 40px rgba(0,0,0,0.8), 0 0 40px rgba(16,185,129,0.09);
+  --shadow-glow: 0 0 30px rgba(16,185,129,0.32);
+
+  --theme-noise: radial-gradient(ellipse 110% 70% at 0% 0%, rgba(16,185,129,0.07) 0%, transparent 55%),
+                 radial-gradient(ellipse 55% 55% at 100% 100%, rgba(5,150,105,0.05) 0%, transparent 50%);
+
+  --scrollbar-thumb: rgba(16, 185, 129, 0.30);
 }
 
+/* ─── THEME 3: CRIMSON FURY ── Fighter / Blood / Intensity ───────────────── */
 [data-theme="crimson"] {
-  --color-cyan: #f43f5e;
-  --color-cyan-dark: #e11d48;
-  --color-cyan-glow: rgba(244, 63, 94, 0.28);
-  --color-cyan-subtle: rgba(244, 63, 94, 0.14);
-  --border-focus: #f43f5e;
+  --primary:           #f43f5e;
+  --primary-dark:      #e11d48;
+  --primary-light:     #fb7185;
+  --primary-glow:      rgba(244, 63, 94, 0.30);
+  --primary-subtle:    rgba(244, 63, 94, 0.10);
+
+  --color-cyan:        #f43f5e;
+  --color-cyan-dark:   #e11d48;
+  --color-cyan-glow:   rgba(244, 63, 94, 0.28);
+  --color-cyan-subtle: rgba(244, 63, 94, 0.10);
+  --border-focus:      #f43f5e;
+
+  /* Dark charcoal-red backgrounds */
+  --bg-base:             #0d0508;
+  --bg-subtle:           #120609;
+  --bg-surface:          #1a0b0e;
+  --bg-surface-elevated: #211014;
+  --bg-surface-hover:    #2a1419;
+  --bg-surface-active:   #32191f;
+  --bg-card:             #1a0b0e;
+
+  /* Sidebar: deep burgundy-black */
+  --sidebar-bg:          linear-gradient(180deg, #120609 0%, #100508 60%, #0e0407 100%);
+  --sidebar-border:      rgba(244, 63, 94, 0.12);
+  --sidebar-glow:        0 0 60px rgba(244, 63, 94, 0.07) inset;
+
+  --header-bg:           rgba(18, 6, 9, 0.92);
+  --header-border:       rgba(244, 63, 94, 0.10);
+
+  --border-subtle:       rgba(244, 63, 94, 0.07);
+  --border-medium:       rgba(244, 63, 94, 0.14);
+  --border-strong:       rgba(244, 63, 94, 0.26);
+
+  --shadow-sm:  0 1px 4px rgba(0,0,0,0.65), 0 0 0 1px rgba(244,63,94,0.05);
+  --shadow-md:  0 4px 16px rgba(0,0,0,0.7), 0 0 20px rgba(244,63,94,0.07);
+  --shadow-lg:  0 12px 40px rgba(0,0,0,0.8), 0 0 40px rgba(244,63,94,0.10);
+  --shadow-glow: 0 0 30px rgba(244,63,94,0.35);
+
+  --theme-noise: radial-gradient(ellipse 110% 70% at 0% 0%, rgba(244,63,94,0.07) 0%, transparent 55%),
+                 radial-gradient(ellipse 55% 55% at 100% 100%, rgba(225,29,72,0.05) 0%, transparent 50%);
+
+  --scrollbar-thumb: rgba(244, 63, 94, 0.30);
 }
 
+/* ─── THEME 4: SOLAR AMBER ── Desert / Gold / VIP ────────────────────────── */
 [data-theme="amber"] {
-  --color-cyan: #f59e0b;
-  --color-cyan-dark: #d97706;
-  --color-cyan-glow: rgba(245, 158, 11, 0.28);
-  --color-cyan-subtle: rgba(245, 158, 11, 0.14);
-  --border-focus: #f59e0b;
+  --primary:           #f59e0b;
+  --primary-dark:      #d97706;
+  --primary-light:     #fbbf24;
+  --primary-glow:      rgba(245, 158, 11, 0.30);
+  --primary-subtle:    rgba(245, 158, 11, 0.10);
+
+  --color-cyan:        #f59e0b;
+  --color-cyan-dark:   #d97706;
+  --color-cyan-glow:   rgba(245, 158, 11, 0.28);
+  --color-cyan-subtle: rgba(245, 158, 11, 0.10);
+  --border-focus:      #f59e0b;
+
+  /* Warm dark brown-black backgrounds */
+  --bg-base:             #0d0900;
+  --bg-subtle:           #120c00;
+  --bg-surface:          #1a1200;
+  --bg-surface-elevated: #211800;
+  --bg-surface-hover:    #2a1f00;
+  --bg-surface-active:   #332600;
+  --bg-card:             #1a1200;
+
+  /* Sidebar: rich mahogany-black */
+  --sidebar-bg:          linear-gradient(180deg, #120c00 0%, #0f0a00 60%, #0c0800 100%);
+  --sidebar-border:      rgba(245, 158, 11, 0.12);
+  --sidebar-glow:        0 0 60px rgba(245, 158, 11, 0.07) inset;
+
+  --header-bg:           rgba(18, 12, 0, 0.92);
+  --header-border:       rgba(245, 158, 11, 0.10);
+
+  --border-subtle:       rgba(245, 158, 11, 0.07);
+  --border-medium:       rgba(245, 158, 11, 0.13);
+  --border-strong:       rgba(245, 158, 11, 0.25);
+
+  --shadow-sm:  0 1px 4px rgba(0,0,0,0.65), 0 0 0 1px rgba(245,158,11,0.05);
+  --shadow-md:  0 4px 16px rgba(0,0,0,0.7), 0 0 20px rgba(245,158,11,0.07);
+  --shadow-lg:  0 12px 40px rgba(0,0,0,0.8), 0 0 40px rgba(245,158,11,0.10);
+  --shadow-glow: 0 0 30px rgba(245,158,11,0.35);
+
+  --theme-noise: radial-gradient(ellipse 110% 70% at 0% 0%, rgba(245,158,11,0.07) 0%, transparent 55%),
+                 radial-gradient(ellipse 55% 55% at 100% 100%, rgba(217,119,6,0.05) 0%, transparent 50%);
+
+  --scrollbar-thumb: rgba(245, 158, 11, 0.30);
 }
 
+/* ─── THEME 5: ULTRAVIOLET ── Night / Mystic / Studio ────────────────────── */
 [data-theme="violet"] {
-  --color-cyan: #a855f7;
-  --color-cyan-dark: #9333ea;
-  --color-cyan-glow: rgba(168, 85, 247, 0.28);
-  --color-cyan-subtle: rgba(168, 85, 247, 0.14);
-  --border-focus: #a855f7;
+  --primary:           #a855f7;
+  --primary-dark:      #9333ea;
+  --primary-light:     #c084fc;
+  --primary-glow:      rgba(168, 85, 247, 0.30);
+  --primary-subtle:    rgba(168, 85, 247, 0.10);
+
+  --color-cyan:        #a855f7;
+  --color-cyan-dark:   #9333ea;
+  --color-cyan-glow:   rgba(168, 85, 247, 0.28);
+  --color-cyan-subtle: rgba(168, 85, 247, 0.10);
+  --border-focus:      #a855f7;
+
+  /* Deep indigo-black backgrounds */
+  --bg-base:             #06030d;
+  --bg-subtle:           #090515;
+  --bg-surface:          #0e0820;
+  --bg-surface-elevated: #140d2a;
+  --bg-surface-hover:    #1a1233;
+  --bg-surface-active:   #20163d;
+  --bg-card:             #0e0820;
+
+  /* Sidebar: dark purple chamber */
+  --sidebar-bg:          linear-gradient(180deg, #090515 0%, #080413 60%, #060311 100%);
+  --sidebar-border:      rgba(168, 85, 247, 0.12);
+  --sidebar-glow:        0 0 60px rgba(168, 85, 247, 0.07) inset;
+
+  --header-bg:           rgba(9, 5, 21, 0.92);
+  --header-border:       rgba(168, 85, 247, 0.10);
+
+  --border-subtle:       rgba(168, 85, 247, 0.07);
+  --border-medium:       rgba(168, 85, 247, 0.14);
+  --border-strong:       rgba(168, 85, 247, 0.26);
+
+  --shadow-sm:  0 1px 4px rgba(0,0,0,0.65), 0 0 0 1px rgba(168,85,247,0.05);
+  --shadow-md:  0 4px 16px rgba(0,0,0,0.7), 0 0 20px rgba(168,85,247,0.07);
+  --shadow-lg:  0 12px 40px rgba(0,0,0,0.8), 0 0 40px rgba(168,85,247,0.10);
+  --shadow-glow: 0 0 30px rgba(168,85,247,0.35);
+
+  --theme-noise: radial-gradient(ellipse 110% 70% at 0% 0%, rgba(168,85,247,0.08) 0%, transparent 55%),
+                 radial-gradient(ellipse 55% 55% at 100% 100%, rgba(147,51,234,0.05) 0%, transparent 50%);
+
+  --scrollbar-thumb: rgba(168, 85, 247, 0.30);
 }
+
 
 /* ==========================================================================
    Base & Reset
@@ -151,6 +351,37 @@ html, body {
   overflow-x: hidden;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
+}
+
+/* Smooth theme transitions on key properties */
+*, *::before, *::after {
+  transition-property: background-color, background, border-color, box-shadow, color, fill, opacity;
+  transition-duration: 0.25s;
+  transition-timing-function: ease;
+}
+
+/* But keep animations and transforms unaffected by the global transition */
+.login-spinner,
+.login-orb,
+.login-logo,
+[class*="animate"] {
+  transition: none !important;
+}
+
+/* Ambient noise layer on body (theme-tinted gradient) */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: var(--theme-noise, none);
+  opacity: 1;
+}
+
+#root {
+  position: relative;
+  z-index: 1;
 }
 
 /* Typography Hierarchy */
@@ -192,11 +423,12 @@ button, input, select, textarea {
   background: var(--bg-base);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--border-medium);
+  background: var(--scrollbar-thumb, var(--border-medium));
   border-radius: var(--radius-full);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--text-muted);
+  background: var(--primary, var(--text-muted));
+  opacity: 0.6;
 }
 
 /* ==========================================================================

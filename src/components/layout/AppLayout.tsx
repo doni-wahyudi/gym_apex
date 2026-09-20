@@ -124,8 +124,9 @@ export const AppLayout: React.FC<AppLayoutProps> = ({
       <aside
         style={{
           width: sidebarCollapsed ? 'var(--sidebar-collapsed-width)' : 'var(--sidebar-width)',
-          background: 'var(--bg-subtle)',
-          borderRight: '1px solid var(--border-medium)',
+          background: 'var(--sidebar-bg, var(--bg-subtle))',
+          borderRight: '1px solid var(--sidebar-border, var(--border-medium))',
+          boxShadow: 'var(--sidebar-glow, none)',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
@@ -349,8 +350,10 @@ export const AppLayout: React.FC<AppLayoutProps> = ({
         <header 
           style={{ 
             height: 'var(--header-height)', 
-            borderBottom: '1px solid var(--border-medium)', 
-            background: 'var(--bg-subtle)', 
+            borderBottom: '1px solid var(--header-border, var(--border-medium))', 
+            background: 'var(--header-bg, var(--bg-subtle))', 
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)',
             display: 'flex', 
             alignItems: 'center', 
             justifyContent: 'space-between',
