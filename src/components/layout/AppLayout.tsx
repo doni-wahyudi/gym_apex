@@ -24,6 +24,7 @@ import { SettingsModal } from '../settings/SettingsModal';
 import { StaffAttendanceModal } from '../staff/StaffAttendanceModal';
 import { useLanguage } from '../../services/i18n';
 import { useTheme } from '../../services/theme';
+import { useAuth } from '../../services/auth';
 
 export type UserRole = 'owner' | 'front_desk' | 'trainer' | 'member';
 
@@ -73,6 +74,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({
 
   const { language, setLanguage, t } = useLanguage();
   const { currentTheme, changeTheme, themes } = useTheme();
+  const { authMode, signOut } = useAuth();
 
   const creds = getSupabaseCredentials();
   const isSupabaseConfigured = Boolean(creds.url && creds.anonKey);
@@ -461,6 +463,17 @@ export const AppLayout: React.FC<AppLayoutProps> = ({
                 </button>
               )}
             </div>
+
+            {/* Auth status badge */}
+            <button
+              type="button"
+              className={`auth-badge ${authMode === 'supabase' ? 'connected' : 'demo'}`}
+              onClick={authMode === 'supabase' ? () => { if (window.confirm(language === 'id' ? 'Keluar dari akun Supabase?' : 'Sign out of Supabase?')) signOut(); } : () => setShowSettings(true)}
+              title={authMode === 'supabase' ? (language === 'id' ? 'Terhubung ke Supabase — Klik untuk keluar' : 'Connected to Supabase — Click to sign out') : (language === 'id' ? 'Mode Demo — Klik untuk pengaturan' : 'Demo Mode — Click for settings')}
+            >
+              <Database size={11} />
+              {authMode === 'supabase' ? (language === 'id' ? 'SUPABASE' : 'SUPABASE') : (language === 'id' ? 'DEMO' : 'DEMO')}
+            </button>
 
             <button 
               type="button" 

@@ -9,13 +9,48 @@ import { ProgressTracker } from './components/fitness/ProgressTracker';
 import { ClassScheduleView } from './components/schedule/ClassScheduleView';
 import { EquipmentManager } from './components/equipment/EquipmentManager';
 import { MemberPortalView } from './components/portal/MemberPortalView';
+import { LoginPage } from './components/auth/LoginPage';
+import { useAuth } from './services/auth';
 import type { Member } from './types/gym';
 import './App.css';
 
 export function App() {
+  const { authMode, isLoading } = useAuth();
   const [activeModule, setActiveModule] = useState<string>('dashboard');
   const [userRole, setUserRole] = useState<UserRole>('owner');
   const [posMember, setPosMember] = useState<Member | null>(null);
+
+  // Show full-screen loader while auth initializes (avoids flash of login page)
+  if (isLoading) {
+    return (
+      <div style={{
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: 'var(--bg-base)',
+        flexDirection: 'column',
+        gap: '1rem',
+      }}>
+        <div style={{
+          width: 40,
+          height: 40,
+          border: '3px solid rgba(255,255,255,0.1)',
+          borderTopColor: 'var(--primary)',
+          borderRadius: '50%',
+          animation: 'spin 0.7s linear infinite',
+        }} />
+        <p style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-body)', fontSize: '0.875rem' }}>
+          ApexForge...
+        </p>
+      </div>
+    );
+  }
+
+  // Show login page if not in demo mode and no Supabase session
+  if (authMode !== 'demo' && authMode !== 'supabase') {
+    return <LoginPage />;
+  }
 
   const handleNavigateToPosWithMember = (member: Member) => {
     setPosMember(member);
