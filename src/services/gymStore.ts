@@ -31,7 +31,10 @@ import {
 } from './mockData';
 import { getSupabase } from './supabaseClient';
 
-const STORAGE_KEY = 'apexforge_gym_data_v1';
+const STORAGE_KEY = 'apexforge_gym_data_v1';       // demo mode data
+const LIVE_STORAGE_KEY = 'apexforge_gym_data_live'; // live Supabase mode data
+
+type StoreMode = 'demo' | 'live';
 
 interface StoreData {
   members: Member[];
@@ -51,13 +54,35 @@ interface StoreData {
 class GymStore {
   private data: StoreData;
   private listeners: Set<() => void> = new Set();
+  private mode: StoreMode = 'demo';
 
   constructor() {
     this.data = this.loadFromStorage();
   }
 
-  private loadFromStorage(): StoreData {
-    const raw = localStorage.getItem(STORAGE_KEY);
+  private get activeKey(): string {
+    return this.mode === 'live' ? LIVE_STORAGE_KEY : STORAGE_KEY;
+  }
+
+  private loadFromStorage(forceEmpty = false): StoreData {
+    if (forceEmpty) {
+      // Live mode: start with completely empty data — no mock members, no fake sales
+      return {
+        members: [],
+        plans: INITIAL_PLANS,   // keep plan templates (owner can edit later)
+        products: INITIAL_PRODUCTS, // keep product catalog (owner can edit later)
+        checkIns: [],
+        trainers: [],
+        classes: [],
+        equipment: [],
+        prs: [],
+        metrics: [],
+        routines: [],
+        sales: [],
+        shift: INITIAL_SHIFT,
+      };
+    }
+    const raw = localStorage.getItem(this.activeKey);
     if (raw) {
       try {
         return JSON.parse(raw);
@@ -65,6 +90,7 @@ class GymStore {
         console.error('Failed to parse local storage gym data:', err);
       }
     }
+    // Demo mode first run — seed with mock data
     return {
       members: INITIAL_MEMBERS,
       plans: INITIAL_PLANS,
@@ -83,7 +109,7 @@ class GymStore {
 
   private persist() {
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(this.data));
+      localStorage.setItem(this.activeKey, JSON.stringify(this.data));
     } catch (err) {
       console.error('Failed to persist gym data:', err);
     }
@@ -99,6 +125,43 @@ class GymStore {
 
   private notify() {
     this.listeners.forEach((fn) => fn());
+  }
+
+  /**
+   * Called when a user signs into Supabase.
+   * Switches to a separate localStorage bucket with EMPTY data (no demo noise).
+   * The user's real gym data accumulates here under LIVE_STORAGE_KEY.
+   */
+  public switchToLiveMode(): void {
+    this.mode = 'live';
+    const existing = localStorage.getItem(LIVE_STORAGE_KEY);
+    if (existing) {
+      // Returning user — restore their real data
+      try {
+        this.data = JSON.parse(existing);
+      } catch {
+        this.data = this.loadFromStorage(true);
+      }
+    } else {
+      // First login ever — start fresh
+      this.data = this.loadFromStorage(true);
+      this.persist();
+    }
+    this.notify();
+  }
+
+  /**
+   * Called when the user signs out or enters demo mode.
+   * Restores the demo data bucket.
+   */
+  public switchToDemoMode(): void {
+    this.mode = 'demo';
+    this.data = this.loadFromStorage();
+    this.notify();
+  }
+
+  public getMode(): StoreMode {
+    return this.mode;
   }
 
   // --- Members ---
@@ -546,7 +609,7 @@ class GymStore {
   }
 
   public resetToDefaultData(): void {
-    localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem(this.activeKey);
     this.data = this.loadFromStorage();
     this.notify();
   }

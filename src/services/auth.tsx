@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import type { Session, User } from '@supabase/supabase-js';
 import { getSupabase } from './supabaseClient';
+import { gymStore } from './gymStore';
 
 export type AuthMode = 'supabase' | 'demo' | 'none';
 
@@ -56,6 +57,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setSession(s);
         setUser(s.user);
         setAuthMode('supabase');
+        gymStore.switchToLiveMode();
       } else {
         setAuthMode('none');
       }
@@ -68,6 +70,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setSession(s);
         setUser(s.user);
         setAuthMode('supabase');
+        gymStore.switchToLiveMode();
         localStorage.removeItem(DEMO_MODE_KEY);
       } else {
         setSession(null);
@@ -90,6 +93,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setSession(data.session);
     setUser(data.user);
     setAuthMode('supabase');
+    gymStore.switchToLiveMode();
     localStorage.removeItem(DEMO_MODE_KEY);
     return { error: null };
   };
@@ -100,12 +104,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setSession(null);
     setUser(null);
     setAuthMode('none');
+    gymStore.switchToDemoMode();
     localStorage.removeItem(DEMO_MODE_KEY);
   };
 
   const enterDemoMode = () => {
     localStorage.setItem(DEMO_MODE_KEY, 'true');
     setAuthMode('demo');
+    gymStore.switchToDemoMode();
   };
 
   return (
